@@ -3,7 +3,7 @@
 
 #include "ChaserAI.h"
 #include "Kismet/GameplayStatics.h"
-#include "ChasingAI.h"
+
 #include "NavigationSystem.h"
 
 void AChaserAI::BeginPlay()

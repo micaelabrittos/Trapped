@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "ChasingAI.h"
+
 #include "Components/TimelineComponent.h"
 #include "ChaserAI.generated.h"
 

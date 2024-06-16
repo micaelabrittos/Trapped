@@ -28,8 +28,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-public:
-
 	bool PlayerDetected;										// Is player detected?
 	bool CanAttackPlayer;										// Is player within attacking distance?
 
@@ -51,7 +49,11 @@ public:
 	UPROPERTY(EditAnywhere)
 		float StoppingDistance = 50.0f;										// How close to the player it needs to be before it stops moving
 
-//		FUNCTIONS
+// Health management
+	void TakeDamage(float DamageAmount);
+
+
+//	ALL	FUNCTIONS
 
 	UFUNCTION()
 		void MoveToPlayer();	// Moves to player
@@ -78,4 +80,14 @@ public:
 		void OnPlayerAttackOverlapEnd(class UPrimitiveComponent* OverlappedComp,		// On player leaving attacking distance
 			class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex);
+
+private:
+
+	//Health
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+		float Health;
+
+	// Max health
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+		float MaxHealth;
 };

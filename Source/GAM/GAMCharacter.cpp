@@ -104,6 +104,9 @@ AGAMCharacter::AGAMCharacter()
 
 	// Uncomment the following line to turn motion controllers on by default:
 	//bUsingMotionControllers = true;
+
+	MaxHealth = 100.0f;
+	CurrentHealth = MaxHealth;
 }
 
 void AGAMCharacter::BeginPlay()
@@ -127,6 +130,9 @@ void AGAMCharacter::BeginPlay()
 	}
 	// ON BEGIN PLAY, FILL HEAT BAR AND ALLOW PLAYER TO SHOOT//////////////////////////////////////////////////////////////
 	// BIND FUNCTIONS TO HEAT TIMELINE///////////////////////////////////////////////////////////////////////////////////
+
+	HealthPercentage = 1.0f;
+	PreviousHealth = HealthPercentage;
 
 	FullHeat = 100.0f;
 	Heat = FullHeat;                            
@@ -478,6 +484,43 @@ void AGAMCharacter::CountDown()
 			Seconds = 59;
 		}
 	}
+}
+
+void AGAMCharacter::ChangeHealth(float Delta)
+{
+	CurrentHealth += Delta;
+	CurrentHealth = FMath::Clamp(CurrentHealth, 0.0f, MaxHealth);
+
+	if (CurrentHealth <= 0.0f)
+	{
+		HandleDeath();
+	}
+}
+
+float AGAMCharacter::GetHealth()
+{
+	return HealthPercentage;
+}
+
+FText AGAMCharacter::GetHealthIntText()
+{
+	int32 HT = FMath::RoundHalfFromZero(HealthPercentage * 100);
+	FString HTS = FString::FromInt(HT);
+	FString FullHTS = FString::FromInt(MaxHealth);
+	FString HealthHUD = HTS + FString(TEXT("/") + FullHTS);
+	FText HTTEXT = FText::FromString(HealthHUD);
+	return HTTEXT;
+}
+
+void AGAMCharacter::UpdateHealth()
+{
+	PreviousHealth = HealthPercentage;
+	HealthPercentage = CurrentHealth / MaxHealth;
+}
+
+void AGAMCharacter::HandleDeath()
+{
+	GameOver();
 }
 
 // When player loses, Level restarts ///////////////////////////////////////////////////////////////////////////////////////

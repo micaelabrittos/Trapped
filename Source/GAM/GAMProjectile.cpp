@@ -3,6 +3,7 @@
 #include "GAMProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "ChasingAI.h"
 
 AGAMProjectile::AGAMProjectile() 
 {
@@ -37,6 +38,20 @@ void AGAMProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPr
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+
+		Destroy();
+	}
+
+	if (OtherActor != nullptr && OtherActor != this)
+	{
+		//Check if actor is Chasing AI
+		AChasingAI* Monster = Cast<AChasingAI>(OtherActor);
+		if (Monster)
+		{
+			// Call the TakeDamage function on ChasingAI
+			float DamageAmount = 35.0f; // Damage to be inflicted
+			Monster->TakeDamage(DamageAmount);
+		}
 
 		Destroy();
 	}

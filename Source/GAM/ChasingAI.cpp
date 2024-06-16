@@ -56,6 +56,9 @@ AChasingAI::AChasingAI()
 
     PlayerAttackCollisionDetection->SetupAttachment(RootComponent);
 
+    MaxHealth = 100.0f;
+    Health = MaxHealth;
+
 }
 
 // Called when the game starts or when spawned
@@ -144,10 +147,14 @@ void AChasingAI::OnPlayerAttackOverlapBegin(UPrimitiveComponent* OverlappedComp,
     AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,                                      // set CanAttackPlayer to true
     bool bFromSweep, const FHitResult& SweepResult)
 {
+
     PlayerREF = Cast<AGAMCharacter>(OtherActor);
     if (PlayerREF)
     {
         CanAttackPlayer = true;
+        PlayerREF->ChangeHealth(-10.0f);
+        PlayerREF->UpdateHealth();
+
     }
 }
 
@@ -160,5 +167,17 @@ void AChasingAI::OnPlayerAttackOverlapEnd(UPrimitiveComponent* OverlappedComp,
         CanAttackPlayer = false;                                                                                    // Walk towards player
 
         SeekPlayer();
+    }
+}
+
+void AChasingAI::TakeDamage(float DamageAmount)
+{
+    Health -= DamageAmount;
+
+    // Check if health drops below zero
+    if (Health <= 0)
+    {
+        //Handle Death
+        Destroy();
     }
 }

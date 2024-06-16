@@ -161,6 +161,35 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Timer")
 	int Seconds = 0;
 
+	///// Health Management ////////
+		//Variables//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+		float MaxHealth;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+		float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float HealthPercentage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float PreviousHealth;
+	
+	     //Functions//
+	UFUNCTION(BlueprintCallable, Category = "Health")
+		void ChangeHealth(float Delta);
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+		float GetHealth();
+
+	UFUNCTION(BlueprintPure, Category = "Health")
+		FText GetHealthIntText();
+
+	UFUNCTION()
+		void UpdateHealth();
+
+	void HandleDeath();
+
 	////////// GameOVER ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	UFUNCTION()

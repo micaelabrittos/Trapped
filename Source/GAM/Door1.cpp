@@ -2,6 +2,7 @@
 
 
 #include "Door1.h"
+#include "Kismet/GameplayStatics.h"
 #include "GAMCharacter.h"
 
 // Sets default values
@@ -47,6 +48,7 @@ void ADoor1::OnInteract()																			// As Director is interacted with
 
 	if (!bIsLocked)																					// If the door is not locked
 	{
+		
 		if (bIsDoorClosed)																			// If the door is closed
 		{
 			Timeline.PlayFromStart();																// Run timeline that opens it
