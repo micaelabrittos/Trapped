@@ -7,14 +7,6 @@
 #include "GAMCharacter.h"                // Added to interact with character (HUD)
 #include "GAMGameMode.generated.h"
 
-//UENUM()
-//enum class EGamePlayState
-//{
-	//EPlaying,
-	//EGameOver,
-	//Eunknown
-//};
-
 UCLASS(minimalapi)
 class AGAMGameMode : public AGameModeBase
 {

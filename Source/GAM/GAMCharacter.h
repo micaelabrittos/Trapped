@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Components/TimelineComponent.h"													// Add Timeline
+#include "Components/TimelineComponent.h"													// Add Time-line
 #include "GAMCharacter.generated.h"
 
 class UInputComponent;
@@ -94,7 +94,7 @@ public:
 	uint8 bUsingMotionControllers : 1;
 
 	
-	/////////// HUD propertys and function to manage Gun Overheating //////////////////////////////////////////////////////////////////////////////////////
+	/////////// HUD property and function to manage Gun Overheating //////////////////////////////////////////////////////////////////////////////////////
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Heat")
 		float Heat;
@@ -208,7 +208,7 @@ protected:
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
-	/** Handles stafing movement, left and right */
+	/** Handles starting movement, left and right */
 	void MoveRight(float Val);
 
 	/**
@@ -250,9 +250,9 @@ protected:
 	bool EnableTouchscreenMovement(UInputComponent* InputComponent);
 
 public:
-	/** Returns Mesh1P subobject **/
+	/** Returns Mesh1P sub-object **/
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
-	/** Returns FirstPersonCameraComponent subobject **/
+	/** Returns FirstPersonCameraComponent sub-object **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 };
 

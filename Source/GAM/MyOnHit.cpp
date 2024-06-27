@@ -38,14 +38,14 @@ void AMyOnHit::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (CurveFloat && CurveFloat2)																						// On Hit only works if both Curvefloats are selected
+	if (CurveFloat && CurveFloat2)																						// On Hit only works if both Curve floats are selected
 	{
 		FOnTimelineFloat TimelineProgress;						
 		FOnTimelineFloat TimelineProgress2;
 		TimelineProgress.BindDynamic(this, &AMyOnHit::PressButton);														// calls Press Button
 		TimelineProgress2.BindDynamic(this, &AMyOnHit::OpenDoor);														// calls open door
-		Timeline.AddInterpFloat(CurveFloat, TimelineProgress);															// timeline uses curve float
-		Timeline2.AddInterpFloat(CurveFloat2, TimelineProgress2);														// timeline 2 uses curve float 2
+		Timeline.AddInterpFloat(CurveFloat, TimelineProgress);															// time-line uses curve float
+		Timeline2.AddInterpFloat(CurveFloat2, TimelineProgress2);														// time-line 2 uses curve float 2
 	}
 }
 
@@ -53,7 +53,7 @@ void AMyOnHit::BeginPlay()
 void AMyOnHit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Timeline.TickTimeline(DeltaTime);																					// timelines are on tick
+	Timeline.TickTimeline(DeltaTime);																					// time-lines are on tick
 	Timeline2.TickTimeline(DeltaTime);
 
 }
@@ -64,14 +64,14 @@ void AMyOnHit::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrim
 	{
 		if (GEngine)
 		{
-			Timeline.PlayFromStart();																														// Run timeline that presses button
+			Timeline.PlayFromStart();																														// Run time-line that presses button
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Button Has been pressed by : %s" ), *OtherActor->GetName()));	// Debug message
 			bIsDoorClosed = false;																		// Door now open
 
 			FTimerHandle TimerHandle;																	// Internal Timer created
 			GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()									// Timer started, 2 seconds
 				{
-					Timeline2.PlayFromStart();															// Run Timeline that open door
+					Timeline2.PlayFromStart();															// Run Time-line that open door
 				}, 2, false);
 		}
 	}

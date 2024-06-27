@@ -20,7 +20,7 @@ public:
 	virtual void BeginPlay() override;
 
 private:
-	/** Crosshair asset pointer */
+	/** Cross-hair asset pointer */
 	class UTexture2D* CrosshairTex;
 
 //Adding New Widget

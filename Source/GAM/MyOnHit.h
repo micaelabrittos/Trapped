@@ -46,11 +46,11 @@ public:
 		class UStaticMeshComponent* Button;
 
 	FTimeline Timeline;
-	UPROPERTY(EditAnywhere)										// Gives me access to add a curvefloat (timeline)
+	UPROPERTY(EditAnywhere)										// Gives me access to add a curve float (time-line)
 		UCurveFloat* CurveFloat;
 
 	FTimeline Timeline2;
-	UPROPERTY(EditAnywhere)										// Gives me access to a second curvefloat (timeline2)
+	UPROPERTY(EditAnywhere)										// Gives me access to a second curve float (timeline2)
 		UCurveFloat* CurveFloat2;
 
 	UPROPERTY(EditAnywhere)

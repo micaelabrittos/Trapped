@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/ShapeComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "ChaserAI.h"
 #include "GAMCharacter.h"
+#include "TimerManager.h"
 #include "ChasingAI.generated.h"
 
 
@@ -29,7 +31,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool PlayerDetected;										// Is player detected?
-	bool CanAttackPlayer;										// Is player within attacking distance?
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attack")
+	bool CanAttackPlayer = false;										// Is player within attacking distance?
 
 	UPROPERTY(BlueprintReadWrite)
 		bool CanDealDamage;										// Can Damage be dealt?
@@ -51,6 +55,16 @@ public:
 
 // Health management
 	void TakeDamage(float DamageAmount);
+
+//Enemy Glow
+	UPROPERTY(EditAnywhere, Category="Effects")
+		UMaterialInterface* DamageMaterial;
+
+	UPROPERTY(EditAnywhere, Category="Effects")
+		UMaterialInterface* OriginalMaterial;
+
+	UPROPERTY()
+		UMaterialInstanceDynamic* DynamicDamageMaterial;
 
 
 //	ALL	FUNCTIONS
@@ -81,13 +95,27 @@ public:
 			class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex);
 
+	//Health
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+		float Health;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+	bool isAlive = true;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attack")
+	bool isKicking = true;
 private:
 
-	//Health
-	UPROPERTY(VisibleAnywhere, Category = "Health")
-		float Health;
+
 
 	// Max health
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
 		float MaxHealth;
+
+		FTimerHandle TimerHandle;
+		FTimerHandle AttackTimerHandle;
+		FTimerHandle PatrolCooldownTimerHandle;
+
+		void ResetMaterial();
 };

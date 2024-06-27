@@ -44,7 +44,7 @@ void AMyCrate::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrim
 {
 	AGAMCharacter* MyCharacter = Cast<AGAMCharacter>(OtherActor);																// Reference to Character
 
-	if ((OtherActor != NULL) && (OtherActor != this) && (OtherActor != MyCharacter) && (OtherComp != NULL))						// If crate is hit by anything but itself or the character (bullet ok)
+	if ((OtherActor != NULL) && (OtherActor != this) && (OtherActor != MyCharacter) && (OtherComp != NULL))						// If crate is hit by anything but itself or the character (bullet okay)
 	{
 		if (GEngine)
 		{																															// Send Debug Message

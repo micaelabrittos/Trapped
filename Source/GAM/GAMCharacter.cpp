@@ -15,7 +15,7 @@
 #include "DrawDebugHelpers.h"																	// Included so that I can display tracers
 #include "Door1.h"																				// Included so that Character can interact with door
 #include "Kismet/KismetMathLibrary.h"															// So I can use NearlyZero
-#include "TimerManager.h"																		// Grants me acces to timelines
+#include "TimerManager.h"																		// Grants me access to time-lines
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -29,7 +29,7 @@ DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 //    and the CapsuleComponent for collision detection (line 46)
 //
 // 2. Set Character's Initial Location:
-//    We set the character's initial location in the world throught the Unreal Editor
+//    We set the character's initial location in the world through the Unreal Editor
 //
 // 3. Attach Camera to Character:
 //    We attach a CameraComponent to the character's Mesh component. This camera
@@ -43,7 +43,7 @@ DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 AGAMCharacter::AGAMCharacter()
 {
 	// Set size for collision capsule
-	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);                          // Capusule component
+	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);                          // Capsule component
 
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
@@ -66,7 +66,7 @@ AGAMCharacter::AGAMCharacter()
 
 	// Create a gun mesh component																									////
 	FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
-	FP_Gun->SetOnlyOwnerSee(false);			// otherwise won't be visible in the multiplayer
+	FP_Gun->SetOnlyOwnerSee(false);			// otherwise won't be visible in the multi-player
 	FP_Gun->bCastDynamicShadow = false;
 	FP_Gun->CastShadow = false;
 	FP_Gun->SetupAttachment(RootComponent);
@@ -78,7 +78,7 @@ AGAMCharacter::AGAMCharacter()
 	// Default offset from the character location for projectiles to spawn
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
 
-	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P, FP_Gun, and VR_Gun 
+	// Note: The ProjectileClass and the skeletal mesh/animation blueprints for Mesh1P, FP_Gun, and VR_Gun 
 	// are set in the derived blueprint asset named MyCharacter to avoid direct content references in C++.
 
 	// Create VR Controllers.
@@ -91,7 +91,7 @@ AGAMCharacter::AGAMCharacter()
 	// Create a gun and attach it to the right-hand VR controller.
 	// Create a gun mesh component
 	VR_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("VR_Gun"));
-	VR_Gun->SetOnlyOwnerSee(false);			// otherwise won't be visible in the multiplayer
+	VR_Gun->SetOnlyOwnerSee(false);			// otherwise won't be visible in the multi-player
 	VR_Gun->bCastDynamicShadow = false;
 	VR_Gun->CastShadow = false;
 	VR_Gun->SetupAttachment(R_MotionController);
@@ -193,7 +193,7 @@ void AGAMCharacter::Tick(float DeltaTime)
 
 void AGAMCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	// set up gameplay key bindings
+	// set up game play key bindings
 	check(PlayerInputComponent);
 
 	// Bind jump events
@@ -217,7 +217,7 @@ void AGAMCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
-	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
+	// "turn rate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("TurnRate", this, &AGAMCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
@@ -234,8 +234,8 @@ void AGAMCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 //
 //    The game engine offers collision channels and presets that define how objects should interact with each other.
 //    When a collision is detected, we can define how objects respond.
-//    For example, an object can be set to completely ignore other meshes, trigger as other obejcts overlap, or completely blocking them from crossing
-//    its boundaries. This itneraction may also involve triggering events, such as adjusting physics properties, playing animations, or applying damage.
+//    For example, an object can be set to completely ignore other meshes, trigger as other objects overlap, or completely blocking them from crossing
+//    its boundaries. This interaction may also involve triggering events, such as adjusting physics properties, playing animations, or applying damage.
 
 // Game Physics:
 
@@ -521,13 +521,11 @@ void AGAMCharacter::UpdateHealth()
 void AGAMCharacter::HandleDeath()
 {
 	GameOver();
+
 }
 
-// When player loses, Level restarts ///////////////////////////////////////////////////////////////////////////////////////
+// When player loses, Game ends
 void AGAMCharacter::GameOver()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), "FirstPersonExampleMap");
-	
-	// Previous line restarts level, Next line when uncommented quits game
-	// UKismetSystemLibrary::QuitGame(GetWorld(), UGameplayStatics::GetPlayerController(GetWorld(), 0), EQuitPreference::Type::Quit, false);
+	UKismetSystemLibrary::QuitGame(GetWorld(), UGameplayStatics::GetPlayerController(GetWorld(), 0), EQuitPreference::Type::Quit, false);
 }

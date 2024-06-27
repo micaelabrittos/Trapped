@@ -37,7 +37,7 @@ void OnInteract();
 void MoveLock();
 
 FTimeline Timeline;
-UPROPERTY(EditAnywhere)										// Gives me access to add a curvefloat (timeline)
+UPROPERTY(EditAnywhere)										// Gives me access to add a curve float (time-line)
 UCurveFloat* CurveFloat;
 
 UPROPERTY(EditAnywhere)										// boolean to know if door is locked or unlocked

@@ -27,10 +27,10 @@ private:
 		TArray<AActor*> Waypoints;																	// For getting access to TargetPoints
 
 	UFUNCTION()
-		ATargetPoint* GetRandomWaypoint();															// Acess to Targetpoint's GetRandomWayPoint function
+		ATargetPoint* GetRandomWaypoint();															// Access to Target point's GetRandomWayPoint function
 	
 	UFUNCTION()
 		void GoToRandomWaypoint();																	// New function for randomness
 
-	FTimerHandle TimerHandle;																		// Timeline access
+	FTimerHandle TimerHandle;																		// Time-line access
 };

@@ -18,6 +18,20 @@ void AChaserAI::BeginPlay()
                                     //  MOVE TO RANDOM LOCATION WITHIN NAVAREA
 void AChaserAI::RandomPatrol()
 {
+    if (!NavArea)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Navigation Area is not available."));
+        return;
+    }
+
+    UWorld* World = GetWorld();
+    if (!World)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("World is not available."));
+        return;
+    }
+
+        
     if (NavArea)
     {
         NavArea->K2_GetRandomReachablePointInRadius(GetWorld(), GetPawn()->GetActorLocation(),

@@ -13,13 +13,13 @@
 //    components allow us to define and manipulate camera behavior.
 //
 //    We can set up multiple cameras in the scene, each with distinct properties, to achieve various camera styles. This
-//    allows us to seamlessly switch between different views during gameplay.
+//    allows us to seamlessly switch between different views during game-play.
 //
 //	  Follow Camera Style:
 //    To implement a follow camera style, we attach the camera to a target. The camera then follows the target's movements.
 //
 //    Top-Down Camera Style:
-//    For a top-down view, I positioned the camera above the game world and adjust its orientation.
+//    For a top-down view, I positioned the camera above the game world and adjusted its orientation.
 //
 //   The camera component also allows for creativity by allowing us to change the field of view, and cinematic shots by combining static
 //   and follow cameras. Adding a post process to the scene will further improve the look and feel of the game

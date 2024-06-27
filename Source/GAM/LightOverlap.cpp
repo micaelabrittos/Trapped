@@ -15,7 +15,7 @@ ALightOverlap::ALightOverlap()
 	LightIntensity = 30000.f;																				// Set Light Intensity
 
 	SpotLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("Spot Light"));							// SpotLight Created
-	SpotLight->Intensity = LightIntensity;																	// Intesity Set
+	SpotLight->Intensity = LightIntensity;																	// Intensity Set
 	SpotLight->SetupAttachment(RootComponent);
 
 	BoxLight = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Component"));							// Collision Box Created

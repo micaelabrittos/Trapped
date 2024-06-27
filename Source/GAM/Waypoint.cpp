@@ -7,7 +7,7 @@
 
 #include "Waypoint.h"
 
-// returns Order of waypoints
+// returns Order of way-points
 
 int AWaypoint::GetWaypointOrder()
 {

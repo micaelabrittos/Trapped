@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "EnemyAI.h"
 #include "MyAIController.h"
 #include "Kismet/GameplayStatics.h"
-#include "EnemyAI.h"
 
 // Sets default values
 AEnemyAI::AEnemyAI()

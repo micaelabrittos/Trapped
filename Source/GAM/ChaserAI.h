@@ -19,11 +19,16 @@ class GAM_API AChaserAI : public AAIController
 public:
     void BeginPlay() override;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+    bool isAlive = true;
+
 private:
 
     class UNavigationSystemV1* NavArea;                                     // Needed to Navigate area, Also added "NavigationSystem" in GAM.Build.cs
 
     FVector RandomLocation;                                                 // Random location used while seeking player
+
+
 
 public:
 
